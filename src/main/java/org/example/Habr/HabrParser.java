@@ -1,5 +1,6 @@
 package org.example.Habr;
 
+import org.example.Main;
 import org.example.Parser.Parser;
 import org.example.Model.Article;
 import org.jsoup.nodes.Document;
@@ -16,9 +17,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class HabrParser implements Parser<ArrayList<Article>>
 {
+    static Logger log = Logger.getLogger(HabrParser.class.getName());
+
     @Override
     public ArrayList<Article> Parse(Document document)
     {
@@ -68,7 +73,7 @@ public class HabrParser implements Parser<ArrayList<Article>>
                 }
                 catch (MalformedURLException e)
                 {
-                    System.out.println(e.getMessage());
+                    log.log(Level.SEVERE, "Неверный адрес изображения");
                 }
             }
 
@@ -81,7 +86,7 @@ public class HabrParser implements Parser<ArrayList<Article>>
             }
             catch (ParseException e)
             {
-                System.out.println(e.getMessage());
+                log.log(Level.SEVERE, "Ошибка при преобразовании времени публикации");
             }
             temp.setTimeOfPublication(timeOfPub);
 
@@ -117,7 +122,7 @@ public class HabrParser implements Parser<ArrayList<Article>>
         }
         catch (IOException e)
         {
-            System.out.println(e.getMessage());
+            log.log(Level.SEVERE, "Неверный адрес выходного файла");
         }
     }
 }

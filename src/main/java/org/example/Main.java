@@ -18,11 +18,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main
 {
+    static Logger log = Logger.getLogger(Main.class.getName());
+
     public static void main(String[] args)
     {
+
         ParserWorker<ArrayList<Article>> parserArts = null;
         ParserWorker<ArrayList<Performance>> parserPerfs = null;
 
@@ -84,7 +89,7 @@ public class Main
                         }
                         catch (IOException | InterruptedException e)
                         {
-                            System.out.println(e.getMessage());
+                            log.log(Level.SEVERE, "Не удалось получить доступ к web-странице");
                         }
                     }
                     else
@@ -113,7 +118,7 @@ public class Main
                     }
                     catch (IOException | InterruptedException e)
                     {
-                        System.out.println(e.getMessage());
+                        log.log(Level.SEVERE, "Не удалось получить доступ к web-странице");
                     }
                 }
                 break;
