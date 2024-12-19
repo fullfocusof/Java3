@@ -60,12 +60,12 @@ public class HabrParser implements Parser<ArrayList<Article>>
             int readingTime = Integer.parseInt(readingTimeStr.substring(0, readingTimeStr.indexOf(" ")));
             temp.setReadingTime(readingTime); // Duration.ofMinutes(readingTime)
 
-            Elements URLElem = art.select("div.tm-article-body.tm-article-snippet__lead>div.tm-article-snippet__cover_cover.tm-article-snippet__cover");
+            Elements URLElem = art.select("div.tm-article-body.tm-article-snippet__lead"); // >div.tm-article-snippet__cover_cover.tm-article-snippet__cover
             if (!URLElem.isEmpty())
             {
                 try
                 {
-                    URL picURL = new URL(art.select("img.tm-article-snippet__lead-image").attr("src"));
+                    URL picURL = new URL(URLElem.select("img[src^=\"https://habrastorage\"]").attr("src")); // .tm-article-snippet__lead-image
                     String pucURLStr = picURL.toString();
                     temp.setPicURL(picURL);
 
